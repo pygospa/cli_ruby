@@ -1,3 +1,5 @@
+# Purpose of this repository
+
 This repository holds the notes I made while reading the book 
 [Build Awesome Command-Line Applications in Ruby 2](http://pragprog.com/book/dccar2/build-awesome-command-line-applications-in-ruby-2)
 by [David Bryant Copeland](http://www.naildrivin5.com/). This book was kindly
