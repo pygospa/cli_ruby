@@ -11,7 +11,7 @@ File.open('todo.txt','r') do |file|
         new_file.puts("#{name},#{created},#{Time.now}")
         puts "Task #{counter} completed"
       else
-        new_file.puts("#{name},#{created},#{cpmpleted}")
+        new_file.puts("#{name},#{created},#{completed}")
       end
 
       counter +=1

@@ -7,7 +7,7 @@ File.open('todo.txt','r') do |file|
     printf("%3d - %s\n",counter,name)
     printf("      Created   : %s\n",created)
     unless completed.nil?
-      printf("        Completed   : %s\n",completed)
+      printf("      Completed   : %s\n",completed)
     end
     counter += 1
   end
