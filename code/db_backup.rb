@@ -3,13 +3,14 @@
 database = ARGV.shift
 username = ARGV.shift
 password = ARGV.shift
+
 end_of_iter = ARGV.shift
 
 
 if end_of_iter.nil?
-  backup_file = config[:database] + '_' + Time.now.strftime('%Y%m%d')
+  backup_file = database + Time.now.strftime("%Y%m%d")
 else
-  backup_file = config[:database] + '_' + end_of_iter
+  backup_file = database + end_of_ite
 end
 
 `mysqldump -u#{username} - p#{password} #{database} > #{backup_file}.sql`
