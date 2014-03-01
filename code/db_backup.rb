@@ -8,11 +8,11 @@ end_of_iter = ARGV.shift
 
 
 if end_of_iter.nil?
-  backup_file = database + Time.now.strftime("%Y%m%d")
+  backup_file = database + '_' + Time.now.strftime("%Y%m%d")
 else
-  backup_file = database + end_of_ite
+  backup_file = database + '_' + end_of_iter
 end
 
-`mysqldump -u#{username} - p#{password} #{database} > #{backup_file}.sql`
+`mysqldump -u#{username} -p#{password} #{database} > #{backup_file}.sql`
 `gzip #{backup_file}.sql`
 
