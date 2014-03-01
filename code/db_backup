@@ -19,6 +19,16 @@ options_parser = OptionParser.new  do |opts|
   opts.on("-p PASSWORD") do |password|
     options[:password] = password
   end
+
+  # Valid Servers
+  servers = {'dev' => '127.0.0.1',
+              'qa' => 'qa001.example.com',
+              'prod' => 'www.example.com' }
+
+  # Using hashes for validation check and send values of keys to code block
+  opts.on('--server SERVER',servers) do |address|
+    options[:address] = address
+  end
 end
 
 options_parser.parse!
