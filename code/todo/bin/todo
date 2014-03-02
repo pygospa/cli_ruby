@@ -3,8 +3,22 @@
 require 'gli'
 include GLI::App
 
+def read_todo(line)
+  line.chomp.split(/,/)
+end
+
+def read_todos(file)
+  File.open(file,'r') do |file|
+    todos = Array.new
+    file.readlines.each do |line|
+      todos.push(read_todo(line))
+    end
+  end
+end
+
+
 switch :s
-flag :f
+flag [:f, :filename]
 
 command :new do |c|
   c.flag :priority
@@ -23,10 +37,13 @@ end
 command :list do |c|
   c.flag :s
   c.action do |global_options,options,args|
-    puts "Global:"
-    puts "-f - #{global_options[:f]}"
-    puts "Command:"
-    puts "-s - #{options[:s]}"
+    todos = read_todos(global_options[:filename])
+    if options[:s] == 'name'
+      todos = todos.sort { |a,b| a <=> b }
+    end
+    todos.each do |todo|
+      puts todo
+    end
   end
 end
 
@@ -38,3 +55,5 @@ command :done do |c|
 end
 
 exit run(ARGV)
+
+
