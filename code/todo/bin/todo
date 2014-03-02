@@ -3,8 +3,14 @@
 require 'gli'
 include GLI::App
 
+DEFAULT_FILE='~/todo.txt'
+
 def read_todo(line)
   line.chomp.split(/,/)
+end
+
+def write_todo(file,name,created=Time.now,completed="")
+  file.puts("#{name},#{created},#{completed}")
 end
 
 def read_todos(file)
@@ -37,7 +43,12 @@ end
 command :list do |c|
   c.flag :s
   c.action do |global_options,options,args|
-    todos = read_todos(global_options[:filename])
+    if global_options[:f]
+      todos = read_todos(global_options[:filename])
+    else
+      todos = read_todos(DEFAULT_FILE)
+    end
+
     if options[:s] == 'name'
       todos = todos.sort { |a,b| a <=> b }
     end

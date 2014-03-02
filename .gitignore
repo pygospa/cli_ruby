@@ -1,3 +1,4 @@
 todo.txt
 *.sql
 *.sql.gz
+.*.swp
