@@ -7,8 +7,9 @@ options = {}
 options_parser = OptionParser.new  do |opts|
 
   # Create a switch
-  opts.on("-i","--iteration") do
+  opts.on("-i ITER","--iteration", /^\d+$/) do |iter_no|
     options[:iteration] = true
+    options[:iter_no] = iter_no
   end
 
   opts.on("-u USER") do |user|
@@ -30,31 +31,11 @@ if database.nil?
 end
 
 if options[:iteration]
-  backup_file = database + '_end_of_iter'
+  backup_file = database + '_iteration_' + options[:iter_no]
 else
   backup_file = database + '_' + Time.now.strftime("%Y%m%d")
 end
 
-puts database
-puts backup_file
-
-#if options[:iteration]
-#  backup_file = 
-
-
-#database = ARGV.shift
-#username = ARGV.shift
-#password = ARGV.shift
-#
-#end_of_iter = ARGV.shift
-#
-#
-#if end_of_iter.nil?
-#  backup_file = database + '_' + Time.now.strftime("%Y%m%d")
-#else
-#  backup_file = database + '_' + end_of_iter
-#end
-#
-#`mysqldump -u#{username} -p#{password} #{database} > #{backup_file}.sql`
-#`gzip #{backup_file}.sql`
+`mysqldump -u#{options[:user]} -p#{options[:password]} #{database} > #{backup_file}.sql`
+`gzip #{backup_file}.sql`
 
